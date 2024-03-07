@@ -1,13 +1,12 @@
 import { Request, Response } from 'express'
+import Issues from '../model/Issues'
 
-const postIssues = (req: Request, res: Response) => {
+const postIssues = async (req: Request, res: Response) => {
   try {
-    const { body } = req
+    const issue = await Issues.create(req?.body)
 
-    const x = body.x
-    console.log(x)
-    res.status(200).json({
-      data: x,
+    res.status(201).json({
+      issue,
     })
   } catch (error) {
     console.log(error)
